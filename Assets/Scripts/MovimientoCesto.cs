@@ -14,15 +14,21 @@ public class MovimientoCesto : MonoBehaviour
 
     public float tiempoRestante;
 
-
+    public GameObject reiniciarLevel;
    
 
     // Start is called before the first frame update
     void Start()
     {
         mostradorPuntaje.GetComponent<Text>().text = "Puntaje: " + score.ToString();
-        mostradorHighScore.GetComponent<Text>().text = "Highscore: " + highscore.ToString("00");
+        mostradorHighScore.GetComponent<Text>().text = "Highscore: " + highscore.ToString();
         
+        /*if (score > highscore)
+        {
+            highscore = score;
+        }*/
+        
+
     }
 
     // Update is called once per frame
@@ -33,6 +39,10 @@ public class MovimientoCesto : MonoBehaviour
         if (tiempoRestante > 0)
         {
             tiempoRestante -= Time.deltaTime;
+        }
+        else
+        {
+            reiniciarLevel.SetActive(true);
         }
 
         contadorTiempo.GetComponent<Text>().text = "Tiempo: " + tiempoRestante.ToString("00");
@@ -49,7 +59,20 @@ public class MovimientoCesto : MonoBehaviour
         
     }
    
+    public void ReiniciarLevel()
+    {
+        tiempoRestante = 30;
+        
+        if (score > highscore)
+        {
+            highscore = score;
+            score = 0;
+        }
+        mostradorHighScore.GetComponent<Text>().text = "Highscore: " + highscore.ToString();
+        mostradorPuntaje.GetComponent<Text>().text = "Puntaje: " + score.ToString();
+        reiniciarLevel.SetActive(false);
 
+    }
     
 
     public void Movimiento ()

@@ -8,7 +8,12 @@ public class CrearPelotas : MonoBehaviour
 
     public float contador;
     public int tiempoLanzarBasketball;
+    //public Rigidbody2D rb;
 
+    private void Start()
+    {
+        
+    }
     void Update()
     {
         contador += Time.deltaTime;
